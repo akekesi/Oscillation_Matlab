@@ -60,19 +60,19 @@ vMax = max(vmax,abs(vmin));
 ymax = fix(15*max(xmax,vmax))/10;
 ymin = fix(15*min(xmin,vmin))/10;
 
-Max = max(ymax,ymin);
+Max = max(ymax,abs(ymin));
 
-LW0 = 3;
+LW0 = 3;    % Linewidth
 LWmin = 1.5;
 LWd = (LW0-LWmin)/(xMax);
 
-nT = [];
-snT = 1;
+nT = zeros(1,fix(h*steps/Tn));  % Periodenzeiten
+snT = 0;
 
 % Video
 if vid == 1
     Video = VideoWriter('Harm_Oszillator_00_inf_b.avi');
-    Video.FrameRate = 13; 
+    Video.FrameRate = 13;
     open(Video)
 end
 
@@ -152,18 +152,17 @@ for n = 1:1:steps
     p21 = plot(t,Y(1,1:n),'Color','#0072BD','LineWidth',2);           % x
     p22 = plot(t,Y(2,1:n),'Color','#D95319','LineWidth',2);           % v
     text(x2a+0.3,1.6*ymax,['$T_n = \frac{2\pi}{\sqrt{\omega_n}} = 2\pi\sqrt{\frac{m}{k}} = $',num2str((double(int64(Tn*100)))/100),'$ s$'],'Interpreter', 'latex')
-    if t(n) > snT*Tn && t(n)-h < snT*Tn
-        nT(snT) = n;
+    if t(n) > (1+snT)*Tn && t(n)-h < (1+snT)*Tn
         snT = snT + 1;
+        nT(1,snT) = n;
     end
-    if ~isempty(nT)
-        for nn = 1:1:length(nT)
-            plot([t(nT(nn)) t(nT(nn))],[ymax 0.9*ymin],':','Color','k','LineWidth',1.5)   % Tn
-            if t(nT(nn)) > x2a+0.5 && t(nT(nn)) < x2e-0.5
-                text(t(nT(nn))+0.1,1.1*ymin,[num2str(nn),'xT_n'],'HorizontalAlignment','center')
-            end
+    for nn = 1:1:snT
+        plot([t(nT(nn)) t(nT(nn))],[ymax 0.9*ymin],':','Color','k','LineWidth',1.5)   % Tn
+        if t(nT(nn)) > x2a+0.5 && t(nT(nn)) < x2e-0.5
+            text(t(nT(nn))+0.1,1.1*ymin,[num2str(nn),'xT_n'],'HorizontalAlignment','center')
         end
     end
+
     xlim([x2a x2e])
     ylim([2*ymin 2*ymax])
     yticks(int64(2*ymin-1):1:int64(2*ymax-1))
