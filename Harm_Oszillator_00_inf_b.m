@@ -1,5 +1,5 @@
 %% Harmonischer Oszillator
-%  hizontal
+%  horizontal
 %  1 x Punktmasse
 %  1 x Feder
 clear all
@@ -79,7 +79,7 @@ end
 % Plot
 for n = 1:1:steps
 
-    sgtitle({'Harmonische Oszillator','Horizontal','Masse: 1x','Feder:  1x'},'FontSize',22)
+    sgtitle({'Harmonischer Oszillator','Horizontal','Masse: 1x','Feder:  1x'},'FontSize',22)
 
     subplot(1,3,1)
     geschw_dx = 0.3;
