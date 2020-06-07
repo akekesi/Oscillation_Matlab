@@ -179,7 +179,7 @@ for n = 1:1:steps
     hold off
 
     subplot(1,3,3)
-    p30 = plot(Y(1,1),0,'o','MarkerSize',10,'LineWidth',2,'Color','k');
+    p30 = plot(Y(1,1),Y(2,1),'o','MarkerSize',10,'LineWidth',2,'Color','k');
     hold on
     p31 = plot(Y(1,1:n),Y(2,1:n),'k','LineWidth',2);
     p32 = plot([0 Y(1,n)],[0 0],'Color','#0072BD','LineWidth',2);
