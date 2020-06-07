@@ -94,7 +94,7 @@ for n = 1:1:steps
     end
 
     kraft_dx = 0.3;
-    kraft_x = kraft_dx*(-1)*Y(1,n)*k/xMax;
+    kraft_x = kraft_dx*(-1)*Y(1,n)*k/(xMax*k);
     kraft_y = geschw_y-0.2;
     if kraft_x > 0
         mark_kraft = '>';
