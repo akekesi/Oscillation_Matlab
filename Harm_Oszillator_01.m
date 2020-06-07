@@ -1,5 +1,5 @@
 %% Harmonischer Oszillator
-% horizontal
+%  horizontal
 %  1 x Punktmasse
 %  1 x Feder
 %  1 x Daempfung
