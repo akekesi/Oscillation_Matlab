@@ -151,7 +151,7 @@ for n = 1:1:steps
     p24 = plot(t,x_b(t),'o','MarkerSize',5,'Color','k');              % x_b
     p21 = plot(t,Y(1,1:n),'Color','#0072BD','LineWidth',2);           % x
     p22 = plot(t,Y(2,1:n),'Color','#D95319','LineWidth',2);           % v
-    text(x2a+0.3,1.6*ymax,['$T_n = \frac{2\pi}{\sqrt{\omega_n}} = 2\pi\sqrt{\frac{m}{k}} = $',num2str((double(int64(Tn*100)))/100),'$ s$'],'Interpreter', 'latex')
+    text(x2a+0.3,1.6*ymax,['$T_n = \frac{2\pi}{\omega_n} = 2\pi\sqrt{\frac{m}{k}} = $',num2str((double(int64(Tn*100)))/100),'$ s$'],'Interpreter', 'latex')
     if t(n) > (1+snT)*Tn && t(n)-h < (1+snT)*Tn
         snT = snT + 1;
         nT(1,snT) = n;
