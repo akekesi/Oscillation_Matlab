@@ -10,7 +10,7 @@ global m;
 global k;
 global c;
 
-vid = 1;    % als Video zu speichern: vid = 1
+vid = 0;    % als Video zu speichern: vid = 1
 
 steps = 150;
 h = 0.1;    % Zeitschritt
