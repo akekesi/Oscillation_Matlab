@@ -35,7 +35,6 @@ zeta = c/(2*m*omega_n);
 omega_d = omega_n*sqrt(1-zeta^2);       % csillap. rendsz. sajat koerfrekv. [rad/s]
 
 if c == 0                               % keine Daempfung
-    Fall = 'keine Daempf.';
     C1 = x;
     C2 = v/omega_n;
     A = sqrt(x^2+v^2/omega_n^2);
@@ -44,13 +43,14 @@ if c == 0                               % keine Daempfung
     fn = 1/Tn;                          % csillapitatlan szabad rezges sajat korfrekvenciaja [Hz = 1/s]
     x_a = @(t) C1*cos(omega_n*t)+C2*sin(omega_n*t);
     x_b = @(t) A*sin(omega_n*t+epsilon);
+    Fall = 'keine Daempf.';
 elseif 0 < zeta && zeta < 1             % schwache Daempfung
     C1 = x;
     C2 = (v+zeta*omega_n*x)/omega_d;
     A = sqrt(C1^2+C2^2);
     epsilon = atan(C1/C2);
     Td = 2*pi/omega_d;                   % periodusido [s]
-    f = 1/Td;                            % rezges sajat korfrekv. [Hz = 1/s]
+    fd = 1/Td;                            % rezges sajat korfrekv. [Hz = 1/s]
     x_a = @(t) exp(-zeta*omega_n*t).*(C1*cos(omega_d*t)+C2*sin(omega_d*t));
     x_b = @(t) A*exp(-zeta*omega_n*t).*sin(omega_d*t+epsilon);
     x_huelle = @(t) A*exp(-zeta*omega_n*t);
