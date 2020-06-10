@@ -312,7 +312,7 @@ elseif 1 < zeta                         % starke Daempfung
     returntext{1,1} = 'x (ana. a)';
     Fall{1,1} = 4;
     if v-Lambda2*x < 10^(-12)
-        Fall{1,2} = '1 < \zeta & v_0 = x_0\cdot\lambda_2 \rightarrow schnellste';
+        Fall{2,1} = '1 < \zeta & v_0 = x_0\cdot\lambda_2 \rightarrow schnellste';
     else
         Fall{2,1} = '1 < \zeta & v_0 \neq x_0\cdot\lambda_2 \rightarrow nicht schnellste';
     end
