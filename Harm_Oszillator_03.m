@@ -150,46 +150,47 @@ for n = 1:1:steps
         mark_f_kraft2 = '.';
     end
 
-    p11 = plot(Y(1,1),0,'o','MarkerSize',10,'LineWidth',2,'Color','k');                             % Anf. 1
+    p11 = plot(Y(1,1),0,'o','MarkerSize',10,'LineWidth',2,'Color','k');                                 % Anf. 1
     hold on
-    p12 = plot(Y(2,1)+d,0,'o','MarkerSize',10,'LineWidth',2,'Color','k');                                   % Anf. 1
-    p15 = plot([-L01 Y(1,n)],[0 0],'LineWidth',LW01-Y(1,n)*LWd1,'Color','#77AC30');                         % Feder 1
-    p16 = plot([Y(1,n) Y(2,n)+d],[0 0],'LineWidth',LW02-(Y(2,n)-Y(1,n))*LWd2,'Color','#77AC30');            % Feder 2
-    plot([-L01 -L01],[-10 10],'LineWidth',5,'Color','k')                                                    % Wand
+    plot(Y(2,1)+d,0,'o','MarkerSize',10,'LineWidth',2,'Color','k')                                      % Anf. 2
+    p15 = plot([-L01 Y(1,n)],[0 0],'LineWidth',LW01-Y(1,n)*LWd1,'Color','#77AC30');                     % Feder 1
+    plot([Y(1,n) Y(2,n)+d],[0 0],'LineWidth',LW02-(Y(2,n)-Y(1,n))*LWd2,'Color','#77AC30')               % Feder 2
+    plot([-L01 -L01],[-10 10],'LineWidth',5,'Color','k')                                                % Wand
 
     plot([Y(1,n) Y(1,n)],[0 kraft_f_y1],'--','Color',[0.7 0.7 0.7])
     plot(Y(1,n)-geschw_dx1,geschw_y1,'Marker','<','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot(Y(1,n)+geschw_dx1,geschw_y1,'Marker','>','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot([Y(1,n)-geschw_dx1 Y(1,n)+geschw_dx1],[geschw_y1 geschw_y1],'LineWidth',3,'Color',[0.7 0.7 0.7])
-    p17 = plot([Y(1,n) Y(1,n)+geschw_x1],[geschw_y1 geschw_y1],'LineWidth',3,'Color','#D95319');            % Geschw. 1
-    plot(Y(1,n)+geschw_x1,geschw_y1,'Marker',mark_geschw1,'LineWidth',3,'Color','#D95319');                 % Geschw. 1
+    p13 = plot([Y(1,n) Y(1,n)+geschw_x1],[geschw_y1 geschw_y1],'LineWidth',3,'Color','#D95319');        % Geschw. 1
+    plot(Y(1,n)+geschw_x1,geschw_y1,'Marker',mark_geschw1,'LineWidth',3,'Color','#D95319')              % Geschw. 1
 
     plot(Y(1,n)-kraft_f_dx1,kraft_f_y1,'Marker','<','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot(Y(1,n)+kraft_f_dx1,kraft_f_y1,'Marker','>','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot([Y(1,n)-kraft_f_dx1 Y(1,n)+kraft_f_dx1],[kraft_f_y1 kraft_f_y1],'LineWidth',3,'Color',[0.7 0.7 0.7])
-    p18 = plot([Y(1,n) Y(1,n)+kraft_f_x1],[kraft_f_y1 kraft_f_y1],'LineWidth',3,'Color','#7E2F8E');         % Kraft_Feder 1
-    plot(Y(1,n)+kraft_f_x1,kraft_f_y1,'Marker',mark_f_kraft1,'LineWidth',3,'Color','#7E2F8E');              % Kraft_Feder 1
+    p14 = plot([Y(1,n) Y(1,n)+kraft_f_x1],[kraft_f_y1 kraft_f_y1],'LineWidth',3,'Color','#7E2F8E');     % Kraft_Feder 1
+    plot(Y(1,n)+kraft_f_x1,kraft_f_y1,'Marker',mark_f_kraft1,'LineWidth',3,'Color','#7E2F8E')           % Kraft_Feder 1
 
     plot([Y(2,n)+d Y(2,n)+d],[0 geschw_y2],'--','Color',[0.7 0.7 0.7])
     plot(Y(2,n)+d-geschw_dx2,geschw_y2,'Marker','<','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot(Y(2,n)+d+geschw_dx2,geschw_y2,'Marker','>','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot([Y(2,n)+d-geschw_dx2 Y(2,n)+d+geschw_dx2],[geschw_y2 geschw_y2],'LineWidth',3,'Color',[0.7 0.7 0.7])
-    p19 = plot([Y(2,n)+d Y(2,n)+d+geschw_x2],[geschw_y2 geschw_y2],'LineWidth',3,'Color','#D95319');        % Geschw. 1
-    plot(Y(2,n)+d+geschw_x2,geschw_y2,'Marker',mark_geschw2,'LineWidth',3,'Color','#D95319');               % Geschw. 1
+    plot([Y(2,n)+d Y(2,n)+d+geschw_x2],[geschw_y2 geschw_y2],'LineWidth',3,'Color','#D95319')           % Geschw. 2
+    plot(Y(2,n)+d+geschw_x2,geschw_y2,'Marker',mark_geschw2,'LineWidth',3,'Color','#D95319')            % Geschw. 2
 
     plot(Y(2,n)+d-kraft_f_dx2,kraft_f_y2,'Marker','<','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot(Y(2,n)+d+kraft_f_dx2,kraft_f_y2,'Marker','>','LineWidth',3,'Color',[0.7 0.7 0.7])
     plot([Y(2,n)+d-kraft_f_dx2 Y(2,n)+d+kraft_f_dx2],[kraft_f_y2 kraft_f_y2],'LineWidth',3,'Color',[0.7 0.7 0.7])
-    p110 = plot([Y(2,n)+d Y(2,n)+d+kraft_f_x2],[kraft_f_y2 kraft_f_y2],'LineWidth',3,'Color','#7E2F8E');    % Kraft_Feder 2
-    plot(Y(2,n)+d+kraft_f_x2,kraft_f_y2,'Marker',mark_f_kraft2,'LineWidth',3,'Color','#7E2F8E');            % Kraft_Feder 2
+    plot([Y(2,n)+d Y(2,n)+d+kraft_f_x2],[kraft_f_y2 kraft_f_y2],'LineWidth',3,'Color','#7E2F8E')        % Kraft_Feder 2
+    plot(Y(2,n)+d+kraft_f_x2,kraft_f_y2,'Marker',mark_f_kraft2,'LineWidth',3,'Color','#7E2F8E')         % Kraft_Feder 2
 
-    p13 = plot(Y(1,n),0,'.','MarkerSize',30,'Color','k');                                                   % Gewicht 1
-    p14 = plot(Y(2,n)+d,0,'.','MarkerSize',30,'Color','k');                                                 % Gewicht 2
+    p12 = plot(Y(1,n),0,'.','MarkerSize',30,'Color','k');                                               % Gewicht 1
+    plot(Y(2,n)+d,0,'.','MarkerSize',30,'Color','k')                                                    % Gewicht 2
+
     xlim([-L01 d+L02])
     xticks(-fix(L01):1:fix(d+L02))
     ylim([-1 1.5])
     yticks([])
-    legend([p11 p13 p17 p18 p15],{'Anfang','Masse','Geschw','F_{Feder}','Feder'},'location','NorthEast')
+    legend([p11 p12 p13 p14 p15],{'Anfang','Masse','Geschw','F_{Feder}','Feder'},'location','NorthEast')
     text(0.5,0.95,{['m_1=',num2str(m1),'kg     k_1=',num2str(k1),'N/m     x_{10}=',num2str(x1),'m     v_{10}=',num2str(v1),'m/s'],['m_2=',num2str(m2),'kg     k_2=',num2str(k2),'N/m     x_{20}=',num2str(x2),'m     v_{20}=',num2str(v2),'m/s']})
     title('Animation','FontSize',16,'FontWeight','normal')
     ax = gca;
