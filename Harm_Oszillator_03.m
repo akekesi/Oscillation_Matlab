@@ -36,9 +36,9 @@ for n = 1:1:steps
     Y(:,n) = y;
 end
 
-[A1,A2,C,omega_n] = analitisch(y0);
+[A1,A2,C,omega_n] = anafunc(y0);
 x1_a = @(t) A1(1,1)*(C(1,1)*cos(omega_n(1,1)*t)+C(2,1)*sin(omega_n(1,1)*t))+A2(1,1)*(C(3,1)*cos(omega_n(2,1)*t)+C(4,1)*sin(omega_n(2,1)*t));
-x2_a = @(t) A1(2,1)*(C(1,1)*cos(omega_n(1,1)*t)+C(2,1)*sin(omega_n(1,1)*t))+A2(2,1)*(C(3,1)*cos(omega_n(2,1)*t)+C(4,1)*sin(omega_n(2,1)*t));;
+x2_a = @(t) A1(2,1)*(C(1,1)*cos(omega_n(1,1)*t)+C(2,1)*sin(omega_n(1,1)*t))+A2(2,1)*(C(3,1)*cos(omega_n(2,1)*t)+C(4,1)*sin(omega_n(2,1)*t));
 
 %% Plot
 % Hilfswerte fuer Plot
@@ -288,8 +288,8 @@ k4 = funk(y+h*k3);
 y_neu = y+h*(k1/6+k2/3+k3/3+k4/6);
 end
 
-%% analitische Funktion
-function [A1,A2,C,omega_n] = analitisch(y0)
+%% analytische Funktion
+function [A1,A2,C,omega_n] = anafunc(y0)
 global m1;
 global m2;
 global k1;
