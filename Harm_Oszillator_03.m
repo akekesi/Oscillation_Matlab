@@ -10,9 +10,9 @@ global m2;
 global k1;
 global k2;
 
-vid = 1;    % als Video zu speichern: vid = 1
+vid = 0;    % als Video zu speichern: vid = 1
 
-steps = 220;
+steps = 150;
 h = 0.1;    % Zeitschritt
 m1 = 2;     % Gewicht 1
 m2 = 1;     % Gewicht 2
@@ -81,6 +81,12 @@ kraftMax2 = max(abs(kraft2));
 
 yMax = max(max(xMax,vMax),max(kraftMax1,kraftMax2));
 
+Ep1 = 1/2*k1*Y(1,:).^2;
+Ep2 = 1/2*k2*(Y(2,:)-Y(1,:)).^2;
+Ek1 = 1/2*m1*Y(3,:).^2;
+Ek2 = 1/2*m2*(Y(4,:)).^2;
+EMax = Ep1(1,1)+Ep2(1,1)+Ek1(1,1)+Ek2(1,1);
+
 LW01 = 3;   % Linewidth 1
 LWmin1 = 1.5;
 LWd1 = (LW01-LWmin1)/(xMax1);
@@ -96,9 +102,10 @@ if vid == 1
     open(Video)
 end
 
+% Plot
 for n = 1:1:steps
     
-    subplot(2,1,1)
+    subplot(2,2,1)
     geschw_dx1 = 0.5;
     geschw_x1 = geschw_dx1*Y(3,n)/vMax1;
     geschw_y1 = -0.3;
@@ -182,36 +189,61 @@ for n = 1:1:steps
     xticks(-fix(L01):1:fix(d+L02))
     ylim([-1 1.5])
     yticks([])
+    legend([p11 p13 p17 p18 p15],{'Anfang','Masse','Geschw','F_{Feder}','Feder'},'location','NorthEast')
+    text(0.5,0.95,{['m_1=',num2str(m1),'kg     k_1=',num2str(k1),'N/m     x_{10}=',num2str(x1),'m     v_{10}=',num2str(v1),'m/s'],['m_2=',num2str(m2),'kg     k_2=',num2str(k2),'N/m     x_{20}=',num2str(x2),'m     v_{20}=',num2str(v2),'m/s']})
+    title('Animation','FontSize',16,'FontWeight','normal')
     ax = gca;
     ax.XAxisLocation = 'origin';
     ax.YAxisLocation = 'origin';
-    legend([p11 p13 p17 p18 p15],{'Anfang','Masse','Geschw','F_{Feder}','Feder'},'location','NorthEast')
-%    title({['x_0=',num2str(Y(1,1)),',   v_0 = ',num2str(Y(2,1 ))],['m = ',num2str(m),',   k = ',num2str(k)]},'FontSize',15,'FontWeight','normal')
     grid on
     grid minor
     daspect([1 1 1])
     drawnow
     hold off
 
-    subplot(2,1,2)
-    t=0:h:h*(n-1);
-    p21 = plot(t,Y(1,1:n),'Color','#0072BD');
+    subplot(2,2,2)
+    p24 = plot([0 0],[0 Ep2(1,n)],'LineWidth',150,'Color',[0 0.4470 0.7410]);
     hold on
-    p22 = plot(t,Y(2,1:n),'--','Color','#0072BD');
-    p23 = plot(t,Y(3,1:n),'Color','#D95319');
-    p24 = plot(t,Y(4,1:n),'--','Color','#D95319');
-    p25 = plot(t,kraft1(1,1:n),'Color','#7E2F8E');
-    p26 = plot(t,kraft2(1,1:n),'--','Color','#7E2F8E');
+    p23 = plot([0 0],[Ep2(1,n) Ep2(1,n)+Ek2(1,n)],'LineWidth',150,'Color',[0.8500 0.3250 0.0980]);
+    p22 = plot([0 0],[Ep2(1,n)+Ek2(1,n) Ep2(1,n)+Ek2(1,n)+Ep1(1,n)],'LineWidth',150,'Color',[0.2 0.7470 0.9410]);
+    p21 = plot([0 0],[Ep2(1,n)+Ek2(1,n)+Ep1(1,n) Ep2(1,n)+Ek2(1,n)+Ep1(1,n)+Ek1(1,n)],'LineWidth',150,'Color',[1.0 0.5250 0.2980]);
+    plot([-0.5 0.5],[EMax EMax],'--k')
+    xlim([-0.5 0.5])
+    xticks([])
+    ylim([0 fix(EMax*17)/10])
+    legend([p21 p22 p23 p24],{'E_{Kin1}','E_{Pot1}','E_{Kin2}','E_{Pot2}'})
+    text(-0.45,EMax+0.04,'E_{Summe}')
+    title('Energie','FontSize',16,'FontWeight','normal')
+    ylabel('E [J]')
+    grid on
+    grid minor
+    daspect([1 1 1])
+    drawnow
+    hold off
+
+    subplot(2,2,[3 4])
+    t=0:h:h*(n-1);
+    p31 = plot(t,Y(1,1:n),'Color','#0072BD');
+    hold on
+    p32 = plot(t,Y(2,1:n),'--','Color','#0072BD');
+    p33 = plot(t,Y(3,1:n),'Color','#D95319');
+    p34 = plot(t,Y(4,1:n),'--','Color','#D95319');
+    p35 = plot(t,kraft1(1,1:n),'Color','#7E2F8E');
+    p36 = plot(t,kraft2(1,1:n),'--','Color','#7E2F8E');
 %    plot(t,x1_a(t),'x','MarkerSize',5,'Color','k')
 %    plot(t,x2_a(t),'x','MarkerSize',5,'Color','k')
-    legend([p21 p22 p23 p24 p25 p26],{'x_1','x_2','v_1','v_2','F_{Feder 1}','F_{Feder 2}'},'location','NorthEast')
-    text(2,fix(yMax*2),'A_1 = ')
-    text(2.6,fix(yMax*2),num2str(A1))
-    text(4,fix(yMax*2),'A_2 = ')
-    text(4.6,fix(yMax*2),num2str(A2))
     xlim([0 h*steps])
     ylim([fix(-yMax*2) fix(yMax*3)])
-    xlabel('t')
+    legend([p31 p32 p33 p34 p35 p36],{'x_1','x_2','v_1','v_2','F_{Feder 1}','F_{Feder 2}'},'location','NorthEast')
+    text(1.1,fix(yMax*2),'A_1 =')
+    text(1.6,fix(yMax*2),num2str(A1))
+    text(2.1,fix(yMax*2),'A_2 =')
+    text(2.6,fix(yMax*2),num2str(A2))
+    text(3.1,fix(yMax*2),'\omega_n^2 =')
+    text(3.6,fix(yMax*2),num2str(omega_n.^2))
+    title('x-t / v-t / F_{Feder}-t','FontSize',16,'FontWeight','normal')
+    xlabel('t [s]')
+    ylabel('x [m],  v [m/s],  F_{Feder} [N]')
     ax = gca;
     ax.XAxisLocation = 'origin';
     grid on
