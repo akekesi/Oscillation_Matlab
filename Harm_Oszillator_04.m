@@ -92,7 +92,7 @@ Ep1 = 1/2*k1*Y(1,:).^2;
 Ep2 = 1/2*k2*(Y(2,:)-Y(1,:)).^2;
 Ep3 = 1/2*k3*Y(2,:).^2;
 Ek1 = 1/2*m1*Y(3,:).^2;
-Ek2 = 1/2*m2*(Y(4,:)).^2;
+Ek2 = 1/2*m2*Y(4,:).^2;
 EMax = Ep1(1,1)+Ep2(1,1)+Ep3(1,1)+Ek1(1,1)+Ek2(1,1);
 
 LW01 = 3;   % Linewidth 1
@@ -221,7 +221,7 @@ for n = 1:1:steps
     p24 = plot([0 0],[Ep3(1,n) Ep3(1,n)+Ek2(1,n)],'LineWidth',150,'Color',[0.8500 0.3250 0.0980]);
     p23 = plot([0 0],[Ep3(1,n)+Ek2(1,n) Ep3(1,n)+Ek2(1,n)+Ep2(1,n)],'LineWidth',150,'Color',[0 0.4470 0.7410]);
     p22 = plot([0 0],[Ep3(1,n)+Ek2(1,n)+Ep2(1,n) Ep3(1,n)+Ek2(1,n)+Ep2(1,n)+Ek1(1,n)],'LineWidth',150,'Color',[1.0 0.5250 0.2980]);
-    p21 = plot([0 0],[Ep3(1,n)+Ek2(1,n)+Ep2(1,n)+Ek1(1,n) Ep3(1,n)+Ek2(1,n)+Ep2(1,n)+Ek1(1,n)+Ep1(1,n)],'LineWidth',150,'Color',[0.2 0.7470 0.9410]);
+    p21 = plot([0 0],[Ep3(1,n)+Ek2(1,n)+Ep2(1,n)+Ek1(1,n) Ep3(1,n)+Ek2(1,n)+Ep2(1,n)+Ek1(1,n)+Ep1(1,n)],'LineWidth',150,'Color',[0.2 0.6470 0.9410]);
     plot([-0.5 0.5],[EMax EMax],'--k')
     xlim([-0.4 0.4])
     xticks([])
